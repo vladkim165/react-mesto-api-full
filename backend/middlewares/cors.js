@@ -5,6 +5,7 @@ const allowedCors = [
   'http://api.mesto-prod.nomoredomains.rocks/',
   'http://localhost:3000/',
   'https://localhost:3000/',
+  'localhost:3000',
 ];
 
 module.exports = (req, res, next) => {
@@ -18,10 +19,8 @@ module.exports = (req, res, next) => {
     return res.end();
   }
 
-  const { origin } = req.headers.Origin;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+  const { origin } = req.headers;
+  res.header('Access-Control-Allow-Origin', origin);
 
   next();
 };
