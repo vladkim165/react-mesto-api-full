@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { NODE_ENV, JWT_SECRET } = process.env;
 const User = require('../models/user');
 
-module.exports.login = (req, res, next) => {
+const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
@@ -26,3 +26,10 @@ module.exports.login = (req, res, next) => {
       next(err);
     });
 };
+
+const logout = (req, res, _next) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+};
+
+module.exports = { login, logout };

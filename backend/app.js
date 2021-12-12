@@ -6,7 +6,7 @@ const { celebrate, Joi, errors } = require('celebrate');
 const { PORT = 3000 } = process.env;
 const app = express();
 require('dotenv').config();
-const { login } = require('./controllers/login');
+const { login, logout } = require('./controllers/login');
 const { createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
@@ -29,6 +29,7 @@ app.post('/signin', celebrate({
     password: Joi.string().required(),
   }),
 }), login);
+app.post('/singout', logout);
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
