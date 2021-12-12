@@ -1,11 +1,11 @@
-export const BASE_URL = 'https://auth.nomoreparties.co'
+export const BASE_URL = 'https://api.mesto-prod.nomoredomains.rocks';
 
 const getResponseData = (res) => {
   if (!res.ok) {
-    return Promise.reject(`Ошибка: ${res.status}`)
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
-  return res
-}
+  return res;
+};
 
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -16,7 +16,7 @@ export const register = (password, email) => {
     },
     body: JSON.stringify({ password, email })
   })
-    .then(response => getResponseData(response))
+    .then(response => getResponseData(response));
 };
 
 export const authorize = (password, email) => {
@@ -26,9 +26,10 @@ export const authorize = (password, email) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
+    credentials: 'include',
     body: JSON.stringify({ password, email })
   })
-    .then(response => getResponseData(response))
+    .then(response => getResponseData(response));
 };
 
 export const getContent = (token) => {
@@ -38,7 +39,8 @@ export const getContent = (token) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-    }
+    },
+    credentials: 'include',
   })
-    .then(response => getResponseData(response))
-}
+    .then(response => getResponseData(response));
+};
