@@ -11,7 +11,7 @@ class Api {
   }
 
   getCardItems() {
-    return fetch(`${this.url}/cards`, {
+    return fetch(`${this.url}/cards/`, {
       credentials: 'include',
     })
       .then((res) => {
@@ -76,7 +76,7 @@ class Api {
   }
 
   likeCard(id) {
-    return fetch(`${this.url}/cards/likes/${id}`, {
+    return fetch(`${this.url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ class Api {
   }
 
   unlikeCard(id) {
-    return fetch(`${this.url}/cards/likes/${id}`, {
+    return fetch(`${this.url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

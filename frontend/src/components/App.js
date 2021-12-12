@@ -12,7 +12,7 @@ import { Route, Switch, useHistory } from "react-router-dom";
 import ProtectedRoute from './ProtectedRoute/ProtectedRoute.js';
 import Register from './Register/Register.js';
 import Login from './Login/Login.js';
-import { register, authorize, getContent } from '../utils/Auth';
+import { register, authorize, unauthorize, getContent } from '../utils/Auth';
 import InfoToolTip from './InfoToolTip/InfoToolTip.js';
 
 function App() {
@@ -47,9 +47,6 @@ function App() {
         return res.json();
       })
       .then((data) => {
-        if (data.token) {
-          localStorage.setItem('token', data.token);
-        }
         handleTokenCheck();
         setLoggedIn(true);
       })
@@ -61,22 +58,19 @@ function App() {
   }
 
   function handleTokenCheck() {
-    const jwt = localStorage.getItem('token');
-    if (jwt) {
-      getContent(jwt)
-        .then((res) => {
-          return res.json();
-        })
-        .then((res) => {
-          setLoggedIn(true);
-          setCurrentUser({ ...currentUser, email: res.data.email });
-        })
-        .catch((err) => console.log(`Ошибка: ${err}`));
-    }
+    getContent()
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        setLoggedIn(true);
+        setCurrentUser({ ...currentUser, email: res.data.email });
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`));
   }
 
   function handleDeleteToken() {
-    localStorage.removeItem('token');
+    unauthorize();
     history.push('/sign-in');
     setLoggedIn(false);
   }
