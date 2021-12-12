@@ -3,7 +3,8 @@ const allowedCors = [
   'http://mesto-prod.nomoredomains.rocks/',
   'https://api.mesto-prod.nomoredomains.rocks/',
   'http://api.mesto-prod.nomoredomains.rocks/',
-  'localhost:3000',
+  'http://localhost:3000/',
+  'https://localhost:3000/',
 ];
 
 module.exports = (req, res, next) => {
