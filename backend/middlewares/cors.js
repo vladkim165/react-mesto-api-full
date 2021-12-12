@@ -18,9 +18,9 @@ module.exports = (req, res, next) => {
     return res.end();
   }
 
-  const { origin } = req.headers;
+  const { origin } = req.headers.Origin;
   if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', origin);
   }
 
   next();
