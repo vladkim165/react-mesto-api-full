@@ -1,0 +1,14 @@
+.account__input {
+  border-bottom: 2px solid #CCCCCC;
+  background-color: transparent;
+  color: #CCCCCC;
+}
+
+.account__input:last-of-type {
+  margin-bottom: 216px;
+}
+
+.account__input:-webkit-autofill, .account__input:-webkit-autofill:hover, .account__input:-webkit-autofill:focus, .account__input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #fff !important;
+}
