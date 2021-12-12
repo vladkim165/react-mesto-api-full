@@ -19,10 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true,
 }));
+app.use(allowedOrigins);
 app.use(cookieParser());
 app.use(requestLogger);
-
-app.use(allowedOrigins);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
