@@ -1,18 +1,5 @@
-const allowedCors = [
-  'https://mesto-prod.nomoredomains.rocks/',
-  'http://mesto-prod.nomoredomains.rocks/',
-  'https://api.mesto-prod.nomoredomains.rocks/',
-  'http://api.mesto-prod.nomoredomains.rocks/',
-  'http://localhost:3000/',
-  'https://localhost:3000/',
-  'localhost:3000',
-];
-
 module.exports = (req, res, next) => {
-  const { origin } = req.headers;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+  res.header('Access-Control-Allow-Origin', '*');
 
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
