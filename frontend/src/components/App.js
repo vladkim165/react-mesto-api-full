@@ -63,11 +63,10 @@ function App() {
         return res.json();
       })
       .then((res) => {
-        if (res.message === 'Необходима авторизация') {
-          return;
+        if (res.message !== 'Необходима авторизация') {
+          setLoggedIn(true);
+          setCurrentUser({ ...currentUser, email: res.email, name: res.name, about: res.about, avatar: res.avatar });
         }
-        setLoggedIn(true);
-        setCurrentUser({ ...currentUser, email: res.email, name: res.name, about: res.about, avatar: res.avatar });
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
   };
@@ -105,7 +104,7 @@ function App() {
   function handleUpdateUser(user) {
     api.setUserInfo(user)
       .then((userInfo) => {
-        setCurrentUser(userInfo);
+        setCurrentUser({ ...currentUser, name: userInfo.name, about: userInfo.about });
         closeAllPopups();
       })
       .catch((err) => {

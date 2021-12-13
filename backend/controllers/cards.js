@@ -6,16 +6,14 @@ module.exports.createCard = (req, res, next) => {
   Card.create({ name, link, owner: id })
     .then((card) => {
       const {
-        cardName,
-        cardLink,
         owner,
         likes,
         _id,
         createdAt,
       } = card;
       return res.status(200).send({
-        cardName,
-        cardLink,
+        name,
+        link,
         owner,
         likes,
         _id,
