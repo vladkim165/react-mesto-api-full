@@ -64,7 +64,7 @@ function App() {
       })
       .then((res) => {
         setLoggedIn(true);
-        setCurrentUser({ ...currentUser, email: res.email });
+        setCurrentUser({ ...currentUser, email: res.email, name: res.name, about: res.about, avatar: res.avatar });
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
   };
@@ -125,27 +125,25 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  React.useEffect(() => {
-    api.getCardItems()
-      .then((cardsData) => {
-        setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
-    api.getUserInfo()
-      .then((userInfo) => {
-        setCurrentUser(pre => ({
-          ...pre, ...userInfo
-        }));
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
-  }, []);
 
   React.useEffect(() => {
     if (loggedIn === true) {
+      api.getCardItems()
+        .then((cardsData) => {
+          setCards(cardsData);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+      api.getUserInfo()
+        .then((userInfo) => {
+          setCurrentUser(pre => ({
+            ...pre, ...userInfo
+          }));
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
       history.push('/');
     }
   }, [loggedIn, history]);

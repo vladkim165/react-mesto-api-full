@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
   const cookie = req.cookies.jwt;
 
+  if (req.originalUrl === 'users/me' && !cookie) {
+    res.status(401).send({ message: 'Необходима авторизация' });
+  }
   if (!cookie) {
     const err = new Error('Необходима авторизация');
     err.statusCode = 401;
