@@ -3,21 +3,21 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 function Card(props) {
 
-  const userContext = React.useContext(CurrentUserContext)
+  const userContext = React.useContext(CurrentUserContext);
 
-  const isOwner = userContext._id === props.card.owner._id
-  const isLiked = props.card.likes.some(item => item._id === userContext._id)
+  const isOwner = userContext._id === props.card.owner;
+  const isLiked = props.card.likes.some(id => id === userContext._id);
 
-  function handleClick () {
-    props.onCardClick(props.card)
+  function handleClick() {
+    props.onCardClick(props.card);
   }
 
-  function handleLikeClick () {
-    props.onCardLike(props.card)
+  function handleLikeClick() {
+    props.onCardLike(props.card);
   }
 
-  function handleDeleteClick () {
-    props.onCardDelete(props.card)
+  function handleDeleteClick() {
+    props.onCardDelete(props.card);
   }
 
   return (
@@ -34,7 +34,7 @@ function Card(props) {
         </div>
       </li>
     </div>
-  )
+  );
 }
 
-export default Card
+export default Card;
