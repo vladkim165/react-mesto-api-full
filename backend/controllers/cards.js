@@ -96,7 +96,7 @@ module.exports.dislikeCard = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       }
-      return res.status(200).send(`${card}, ${req.user._id}`);
+      return res.status(200).send(card);
     })
     .catch((e) => {
       const err = new Error('Ошибка. Переданы некорректные данные');
