@@ -22,6 +22,9 @@ module.exports = (req, res, next) => {
 
     next(err);
   }
+  console.log(payload);
+
   req.user = payload;
+  console.log(req.user);
   next();
 };
