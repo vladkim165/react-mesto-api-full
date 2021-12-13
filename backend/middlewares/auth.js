@@ -14,9 +14,8 @@ module.exports = (req, res, next) => {
 
   try {
     const { JWT_SECRET = 'dev-key' } = process.env;
-    console.log(cookie);
-    console.log(payload);
     payload = jwt.verify(cookie, JWT_SECRET);
+    console.log(payload);
   } catch (e) {
     const err = new Error('Необходима авторизация. Неверный токен');
     err.statusCode = 401;
