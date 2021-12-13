@@ -50,12 +50,14 @@ module.exports.getUser = (req, res, next) => {
         about,
         avatar,
         _id,
+        email,
       } = user;
       return res.status(200).send({
         name,
         about,
         avatar,
         _id,
+        email,
       });
     })
     .catch((e) => {

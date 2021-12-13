@@ -57,17 +57,17 @@ function App() {
       });
   }
 
-  const handleTokenCheck = React.useCallback(() => {
+  const handleTokenCheck = () => {
     getContent()
       .then((res) => {
         return res.json();
       })
       .then((res) => {
         setLoggedIn(true);
-        setCurrentUser({ ...currentUser, email: res.data.email });
+        setCurrentUser({ ...currentUser, email: res.email });
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
-  }, [currentUser]);
+  };
 
   function handleDeleteToken() {
     unauthorize();
@@ -123,7 +123,7 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-  }, [handleTokenCheck]);
+  }, []);
 
   React.useEffect(() => {
     api.getCardItems()
