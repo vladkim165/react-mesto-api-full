@@ -12,7 +12,7 @@ class Api {
 
   getCardItems() {
     return fetch(`${this.url}/cards/`, {
-      'credentials': 'include',
+      credentials: 'include',
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -22,10 +22,10 @@ class Api {
   setUserInfo(userInfo) {
     return fetch(`${this.url}/users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
       body: JSON.stringify({
         name: userInfo.name,
         about: userInfo.info
@@ -48,10 +48,10 @@ class Api {
   addNewCard(item) {
     return fetch(`${this.url}/cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
       body: JSON.stringify({
         name: item.name,
         link: item.link
@@ -65,10 +65,10 @@ class Api {
   deleteCard(id) {
     return fetch(`${this.url}/cards/${id}`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -78,10 +78,10 @@ class Api {
   likeCard(id) {
     return fetch(`${this.url}/cards/${id}/likes`, {
       method: 'PUT',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -91,10 +91,10 @@ class Api {
   unlikeCard(id) {
     return fetch(`${this.url}/cards/${id}/likes`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
     })
       .then((res) => {
         return this._getResponseData(res);
@@ -104,10 +104,10 @@ class Api {
   changeAvatar(avatarLink) {
     return fetch(`${this.url}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include',
       body: JSON.stringify({
         avatar: avatarLink
       })

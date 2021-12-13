@@ -30,7 +30,7 @@ app.post('/signin', celebrate({
     password: Joi.string().required(),
   }),
 }), login);
-app.post('/singout', logout);
+app.post('/signout', logout);
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),

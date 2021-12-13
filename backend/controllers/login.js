@@ -14,6 +14,7 @@ const login = (req, res, next) => {
       );
       res.cookie('jwt', token, {
         maxAge: 3600000 * 24 * 7,
+        httpOnly: true,
       });
       res.status(200).send({ message: 'Вы успешно залогинены' });
     })
@@ -27,7 +28,7 @@ const login = (req, res, next) => {
 
 const logout = (req, res, _next) => {
   res.clearCookie('jwt');
-  res.redirect('/');
+  res.status(200).send({ message: 'Вы успешно разлогинены' });
 };
 
 module.exports = { login, logout };
