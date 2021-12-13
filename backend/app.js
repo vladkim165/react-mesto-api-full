@@ -37,6 +37,11 @@ app.post('/signin', celebrate({
   }),
 }), login);
 app.post('/signout', logout);
+
+// При создании пользователя ставится дефолтный аватар,
+// в форме регистрации есть только поля мейла и пароля.
+// Также при открытии ссылки на ваш скриншот открывается битая страница без стилей/скриншота.
+
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
