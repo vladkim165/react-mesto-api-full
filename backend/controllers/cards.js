@@ -50,7 +50,7 @@ module.exports.deleteCard = (req, res, next) => {
 
         next(err);
       }
-      return res.status(200).send(`Карточка успешно удалена: ${card}`);
+      return res.status(200).send(card);
     })
     .catch((e) => {
       const err = new Error('Ошибка. Переданы некорректные данные');
@@ -73,7 +73,7 @@ module.exports.likeCard = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       }
-      return res.status(200).send(`Карточка успешно лайкнута: ${card}`);
+      return res.status(200).send(card);
     })
     .catch((e) => {
       const err = new Error('Ошибка. Переданы некорректные данные');
@@ -96,7 +96,7 @@ module.exports.dislikeCard = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       }
-      return res.status(200).send(`Лайк успешно убран: ${card}`);
+      return res.status(200).send(card);
     })
     .catch((e) => {
       const err = new Error('Ошибка. Переданы некорректные данные');
