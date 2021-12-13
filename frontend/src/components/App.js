@@ -63,6 +63,9 @@ function App() {
         return res.json();
       })
       .then((res) => {
+        if (res.message === 'Необходима авторизация') {
+          return;
+        }
         setLoggedIn(true);
         setCurrentUser({ ...currentUser, email: res.email, name: res.name, about: res.about, avatar: res.avatar });
       })
