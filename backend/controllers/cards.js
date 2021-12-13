@@ -84,24 +84,25 @@ module.exports.likeCard = (req, res, next) => {
     });
 };
 
-module.exports.dislikeCard = (req, res, next) => Card.findByIdAndUpdate(
-  req.params.cardId,
-  { $pull: { likes: req.user._id } },
-  { new: true },
-)
-  .then((card) => {
-    if (!card) {
-      const err = new Error('Ошибка. Карточка не найдена');
-      err.statusCode = 404;
+module.exports.dislikeCard = (req, res, next) => {
+  Card.findByIdAndUpdate(
+    req.params.cardId,
+    { $pull: { likes: req.user._id } },
+    { new: true },
+  )
+    .then((card) => {
+      if (!card) {
+        const err = new Error('Ошибка. Карточка не найдена');
+        err.statusCode = 404;
+        next(err);
+      }
+      return res.status(200).send(`${card}, ${req.user._id}`);
+    })
+    .catch((e) => {
+      const err = new Error('Ошибка. Переданы некорректные данные');
+      if (e.name === 'CastError') {
+        err.statusCode = 400;
+      }
       next(err);
-    }
-    return res.status(200).send(card);
-  })
-  .catch((e) => {
-    const err = new Error('Ошибка. Переданы некорректные данные');
-    if (e.name === 'CastError') {
-      err.statusCode = 400;
-    }
-    next(err);
-  });
-
+    });
+};
