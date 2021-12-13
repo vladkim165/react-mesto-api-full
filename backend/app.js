@@ -16,12 +16,13 @@ const allowedOrigins = require('./middlewares/cors');
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use(express.json());
-app.use(allowedOrigins);
 app.use(express.urlencoded({
   extended: true,
 }));
 app.use(cookieParser());
 app.use(requestLogger);
+
+app.use(allowedOrigins);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
