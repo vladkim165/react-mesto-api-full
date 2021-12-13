@@ -57,7 +57,7 @@ function App() {
       });
   }
 
-  function handleTokenCheck() {
+  const handleTokenCheck = React.useCallback(() => {
     getContent()
       .then((res) => {
         return res.json();
@@ -67,7 +67,7 @@ function App() {
         setCurrentUser({ ...currentUser, email: res.data.email });
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
-  }
+  }, [currentUser]);
 
   function handleDeleteToken() {
     unauthorize();
@@ -123,15 +123,16 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-  }, []);
+  }, [handleTokenCheck]);
 
   React.useEffect(() => {
-    if (loggedIn === true) {
-      history.push('/');
-    }
-  }, [loggedIn]);
-
-  React.useEffect(() => {
+    api.getCardItems()
+      .then((cardsData) => {
+        setCards(cardsData);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
     api.getUserInfo()
       .then((userInfo) => {
         setCurrentUser(pre => ({
@@ -144,14 +145,10 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    api.getCardItems()
-      .then((cardsData) => {
-        setCards(cardsData);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
-  }, []);
+    if (loggedIn === true) {
+      history.push('/');
+    }
+  }, [loggedIn, history]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);

@@ -12,7 +12,7 @@ class Api {
 
   getCardItems() {
     return fetch(`${this.url}/cards/`, {
-      credentials: 'include',
+      'credentials': 'include',
     })
       .then((res) => {
         return this._getResponseData(res);

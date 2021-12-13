@@ -22,11 +22,11 @@ export const register = (password, email) => {
 export const authorize = (password, email) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    credentials: 'include',
     body: JSON.stringify({ password, email })
   })
     .then(response => getResponseData(response));
@@ -35,22 +35,22 @@ export const authorize = (password, email) => {
 export const unauthorize = () => {
   return fetch(`${BASE_URL}/signout`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    credentials: 'include',
   });
 };
 
 export const getContent = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
   })
     .then(response => getResponseData(response));
 };
