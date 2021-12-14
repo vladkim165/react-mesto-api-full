@@ -7,6 +7,7 @@ const {
   editProfile,
   editProfileAvatar,
 } = require('../controllers/users');
+const { isUrl } = require('./cards');
 
 router.get('/', getAllUsers);
 router.get('/me', getCurrentUser);
@@ -26,7 +27,7 @@ router.patch('/me', celebrate({
 
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required().uri(),
+    avatar: Joi.string().custom(isUrl),
   }),
 }), editProfileAvatar);
 
