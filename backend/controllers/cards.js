@@ -45,7 +45,7 @@ module.exports.deleteCard = (req, res, next) => {
         next(err);
       }
       if (card.owner !== userId) {
-        console.log(`${card.owner.toString()} !== ${typeof userId}, ${card.owner !== userId} `);
+        console.log(`${card.owner.toString()} !== ${typeof userId}, ${card.owner.toString() !== userId} `);
         const err = new Error('Ошибка. Вы не являетесь создателем карточки');
         err.statusCode = 403;
 
