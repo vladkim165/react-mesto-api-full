@@ -12,6 +12,7 @@ const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const allowedOrigins = require('./middlewares/cors');
+const { router, isUrl } = require('./routes/cards');
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
@@ -38,20 +39,18 @@ app.post('/signin', celebrate({
 }), login);
 app.post('/signout', logout);
 
-// При создании пользователя ставится дефолтный аватар,
-// в форме регистрации есть только поля мейла и пароля.
-// Также при открытии ссылки на ваш скриншот открывается битая страница без стилей/скриншота.
-
 app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
+    link: Joi.string().custom(isUrl),
   }),
 }), createUser);
 
 app.use(auth);
 app.use('/users', require('./routes/users'));
-app.use('/cards', require('./routes/cards'));
+
+app.use('/cards', router);
 
 app.use(errorLogger);
 

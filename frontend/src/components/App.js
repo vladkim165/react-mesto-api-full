@@ -65,7 +65,7 @@ function App() {
       .then((res) => {
         if (res.message !== 'Необходима авторизация') {
           setLoggedIn(true);
-          setCurrentUser({ ...currentUser, email: res.email, name: res.name, about: res.about, avatar: res.avatar });
+          setCurrentUser({ ...currentUser, email: res.email, name: res.name, about: res.about, avatar: res.avatar, _id: res._id });
         }
       })
       .catch((err) => console.log(`Ошибка: ${err}`));

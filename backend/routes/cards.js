@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
 const {
   createCard,
   getAllCards,
@@ -8,10 +9,18 @@ const {
   dislikeCard,
 } = require('../controllers/cards');
 
+const isUrl = (value) => {
+  const result = validator.isURL(value);
+  if (result) {
+    return value;
+  }
+  throw new Error('URL validation error');
+};
+
 router.post('/', celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required().uri(),
+    link: Joi.string().required().custom(isUrl),
   }),
 }), createCard);
 
@@ -35,4 +44,4 @@ router.delete('/:cardId/likes', celebrate({
   }),
 }), dislikeCard);
 
-module.exports = router;
+module.exports = { router, isUrl };
